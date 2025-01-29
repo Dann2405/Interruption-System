@@ -41,7 +41,7 @@ pico_set_program_name(Interruption_System "Interruption_System")
 pico_set_program_version(Interruption_System "0.1")
 
 # Generate PIO header
-pico_generate_pio_header(Interruption_System ${CMAKE_CURRENT_LIST_DIR}/blink.pio)
+pico_generate_pio_header(Interruption_System ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio)
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(Interruption_System 1)
@@ -49,7 +49,9 @@ pico_enable_stdio_usb(Interruption_System 1)
 
 # Add the standard library to the build
 target_link_libraries(Interruption_System
-        pico_stdlib)
+        pico_stdlib
+        hardware_pio
+        hardware_clocks)
 
 # Add the standard include files to the build
 target_include_directories(Interruption_System PRIVATE
@@ -59,7 +61,7 @@ target_include_directories(Interruption_System PRIVATE
 # Add any user requested libraries
 target_link_libraries(Interruption_System 
         hardware_pio
-        
+        hardware_clocks
         )
 
 pico_add_extra_outputs(Interruption_System)
