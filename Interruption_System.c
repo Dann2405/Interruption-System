@@ -32,9 +32,18 @@ int main()
 {
     stdio_init_all();
     init_gpio();
+    PIO pio = pio0;
+    int sm = 0;
+    uint offset = pio_add_program(pio, &ws2812_program);
+
+    ws2812_program_init(pio, sm, offset, WS2812_PIN, 800000, IS_RGBW);
 
     while (true) 
     {
         blink_led();
+        set_one_led(led_r, led_g, led_b);
+        sleep_ms(tempo);
+        set_one_led(0, 0, 0);
+        sleep_ms(tempo);
     }
 }
