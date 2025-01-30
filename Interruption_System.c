@@ -41,9 +41,9 @@ int main()
     while (true) 
     {
         blink_led();
-        set_number5(led_r, led_g, led_b);
+        set_number6(led_r, led_g, led_b);
         sleep_ms(tempo);
-        set_number5(0, 0, 0);
+        set_number6(0, 0, 0);
         sleep_ms(tempo);
     }
 }

@@ -73,6 +73,15 @@ bool number5[columns][rows] =
         1, 1, 1, 1, 0
     };
 
+bool number6[columns][rows] = 
+    {
+        1, 1, 1, 1, 0,
+        1, 0, 0, 0, 0,
+        1, 1, 1, 1, 0,
+        1, 0, 0, 1, 0,
+        1, 1, 1, 1, 0
+    };
+
 // envia o valor da cor para o led
 static inline void put_pixel(uint32_t pixel_grb)
 {
@@ -316,6 +325,45 @@ void set_number5(uint8_t r, uint8_t g, uint8_t b)
             for (int j = rows - 1; j >= 0; j--)
             {
                 if (number5[i][j])
+                {
+                    put_pixel(color);
+                }
+                else
+                {
+                    put_pixel(0);
+                }
+            }
+        }
+    }
+}
+
+void set_number6(uint8_t r, uint8_t g, uint8_t b)
+{
+    // Define a cor com base nos paramentros fornecidos
+    uint32_t color = urgb_u32(r, g, b);
+
+    // Configuração do caminho em zigue-zague
+    for (int i = columns - 1; i >= 0; i--)
+    {
+        if ((columns - i) % 2 == 0)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if (number6[i][j])
+                {
+                    put_pixel(color);
+                }
+                else
+                {
+                    put_pixel(0);
+                }
+            }
+        }
+        else
+        {
+            for (int j = rows - 1; j >= 0; j --)
+            {
+                if (number6[i][j])
                 {
                     put_pixel(color);
                 }
