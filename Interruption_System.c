@@ -6,6 +6,10 @@
 
 #include "ws2812.pio.h"
 
+#include "include/leds.h"
+#include "include/button.h"
+#include "include/matrix5x5.h"
+
 /*Descrição do Projeto:
 Neste projeto, você deverá utilizar os seguintes componentes conectados à placa BitDogLab:
 • Matriz 5x5 de LEDs (endereçáveis) WS2812, conectada à GPIO 7.
@@ -23,16 +27,6 @@ Funcionalidades do Projeto
 caracteres em estilo digital (ex.: segmentos iluminados que formem o número).
 • Alternativamente, é permitido utilizar um estilo criativo, desde que o número seja claramente
 identificável.*/
-
-// Configuração dos pinos
-#define NUM_PIXELS 25
-#define WS2812_PIN 7
-const uint LED_RED = 13;
-const uint LED_GREEN = 11;
-const uint LED_BLUE = 12;
-const uint Button_A = 5;
-const uint Button_B = 6;
-
 
 int main()
 {
