@@ -51,7 +51,8 @@ bool number3[columns][rows] =
         1, 0, 0, 1, 0,
         0, 0, 1, 0, 0,
         1, 0, 0, 1, 0,
-        0, 1, 1, 0, 0};
+        0, 1, 1, 0, 0
+    };
 
 bool number4[columns][rows] =
     {
@@ -59,7 +60,18 @@ bool number4[columns][rows] =
         0, 1, 0, 1, 0,
         1, 1, 1, 1, 0,
         0, 0, 0, 1, 0,
-        0, 0, 0, 1, 0};
+        0, 0, 0, 1, 0
+    };
+
+
+bool number5[columns][rows] =
+    {
+        1, 1, 1, 1, 0,
+        1, 0, 0, 0, 0,
+        1, 1, 1, 1, 0,
+        0, 0, 0, 1, 0,
+        1, 1, 1, 1, 0
+    };
 
 // envia o valor da cor para o led
 static inline void put_pixel(uint32_t pixel_grb)
@@ -81,7 +93,7 @@ void set_number0(uint8_t r, uint8_t g, uint8_t b)
     // Define a cor com base nos parâmetros fornecidos
     uint32_t color = urgb_u32(r, g, b);
 
-    // Define todos os LEDs com a cor especificada
+    // Configuração do caminho em zigue zague
     for (int i = columns - 1; i >= 0; i--) // pecorre as linhas de cima para baixo
     {
         if ((columns - i) % 2 == 0) // Colunas ler da direita para a esquerda
@@ -121,7 +133,7 @@ void set_number1(uint8_t r, uint8_t g, uint8_t b)
     // Define a cor com base nos parâmetros fornecidos
     uint32_t color = urgb_u32(r, g, b);
 
-    // Define todos os LEDs com a cor especificada
+    // Configuração do caminho em zigue zague
     for (int i = columns - 1; i >= 0; i--) // pecorre as linhas de cima para baixo
     {
         if ((columns - i) % 2 == 0) // Colunas ler da direita para a esquerda
@@ -161,7 +173,7 @@ void set_number2(uint8_t r, uint8_t g, uint8_t b)
     // Define a cor com base nos parâmetros fornecidos
     uint32_t color = urgb_u32(r, g, b);
 
-    // Define todos os LEDs com a cor especificada
+    // Configuração do caminho em zigue zague
     for (int i = columns - 1; i >= 0; i--) // pecorre as linhas de cima para baixo
     {
         if ((columns - i) % 2 == 0) // Colunas ler da direita para a esquerda
@@ -264,6 +276,46 @@ void set_number4(uint8_t r, uint8_t g, uint8_t b)
             for (int j = rows - 1; j >= 0; j--)
             {
                 if (number4[i][j])
+                {
+                    put_pixel(color);
+                }
+                else
+                {
+                    put_pixel(0);
+                }
+            }
+        }
+    }
+}
+
+void set_number5(uint8_t r, uint8_t g, uint8_t b)
+{
+    // Define a cor com base nos parâmetros fornecidos
+    uint32_t color = urgb_u32(r, g, b);
+
+    //configuraçao do caminho em zigue zague
+    for (int i = columns - 1; i >= 0; i--)
+    {
+        if ((columns - i) % 2 == 0)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if(number5[i][j])
+                {
+                    put_pixel(color);
+                }
+                else
+                {
+                    put_pixel(0);
+                }
+            }
+
+        }
+        else
+        {
+            for (int j = rows - 1; j >= 0; j--)
+            {
+                if (number5[i][j])
                 {
                     put_pixel(color);
                 }
