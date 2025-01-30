@@ -36,6 +36,15 @@ bool number1[columns][rows] =
         1, 1, 1, 1, 1
     };
 
+bool number2[columns][rows] =
+    {
+        0, 1, 1, 0, 0,
+        1, 0, 0, 1, 0,
+        0, 0, 1, 0, 0,
+        0, 1, 0, 0, 0,
+        1, 1, 1, 1, 0
+    };
+
 // envia o valor da cor para o led
 static inline void put_pixel(uint32_t pixel_grb)
 {
@@ -119,6 +128,46 @@ void set_number1(uint8_t r, uint8_t g, uint8_t b)
             for(int j = rows - 1; j >= 0; j--) // ler da esquerda para a direita
             {
                 if (number1[i][j])
+                {
+                    put_pixel(color); // Liga o LED com um no buffer
+                }
+                else
+                {
+                    put_pixel(0); // Desliga os LEDs com zero no buffer
+                }
+            }
+        }
+    }
+}
+
+//number2 matrix
+void set_number2(uint8_t r, uint8_t g, uint8_t b)
+{
+    // Define a cor com base nos parâmetros fornecidos
+    uint32_t color = urgb_u32(r, g, b);
+
+    // Define todos os LEDs com a cor especificada
+    for (int i = columns - 1; i >= 0; i--) // pecorre as linhas de cima para baixo
+    {
+        if ((columns - i) % 2 == 0) // Colunas ler da direita para a esquerda
+        {
+            for (int j = 0; j < rows; j++) // (Linhas são lidas da esquerda para a direita (j = 0 a 4))
+            {
+                if (number2[i][j]) 
+                {
+                    put_pixel(color); // Liga o LED com um no buffer
+                }
+                else
+                {
+                    put_pixel(0); // Desliga os LEDs com zero no buffer
+                }
+            }
+        }
+        else // colunas impares tem direção invertida (Linhas são lidas da direita para a esquerda (j = 4 a 0), criando um padrão zigue-zague)
+        {
+            for(int j = rows - 1; j >= 0; j--) // ler da esquerda para a direita
+            {
+                if (number2[i][j])
                 {
                     put_pixel(color); // Liga o LED com um no buffer
                 }
