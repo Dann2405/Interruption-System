@@ -15,16 +15,16 @@
 
 uint8_t led_r = 0;   // Intensidade do vermelho
 uint8_t led_g = 0;   // Intensidade do verde
-uint8_t led_b = 200; // Intensidade do azul
+uint8_t led_b = 100; // Intensidade do azul
 
 bool number0[columns][rows] =
-{
-    1,0,1,0,1,
-    1,0,1,0,1,
-    0,0,0,0,0,
-    1,0,0,1,0,
-    0,1,0,1,0
-};
+    {
+        0, 0, 0, 1, 0,
+        0, 0, 0, 1, 0,
+        0, 0, 1, 0, 0,
+        0, 1, 0, 0, 0,
+        0, 0, 0, 0, 0
+    };
 
 static inline void put_pixel(uint32_t pixel_grb)
 {
@@ -44,15 +44,32 @@ void set_one_led(uint8_t r, uint8_t g, uint8_t b)
     // Define todos os LEDs com a cor especificada
     for (int i = columns - 1; i >= 0; i--)
     {
-        for (int j = 0; j < rows; j++)
+        if ((columns - i) % 2 == 0)
         {
-            if (number0[i][j])
+            for (int j = 0; j < rows; j++)
             {
-                put_pixel(color); // Liga o LED com um no buffer
+                if (number0[i][j])
+                {
+                    put_pixel(color); // Liga o LED com um no buffer
+                }
+                else
+                {
+                    put_pixel(0); // Desliga os LEDs com zero no buffer
+                }
             }
-            else
+        }
+        else
+        {
+            for(int j = rows - 1; j >= 0; j--)
             {
-                put_pixel(0); // Desliga os LEDs com zero no buffer
+                if (number0[i][j])
+                {
+                    put_pixel(color); // Liga o LED com um no buffer
+                }
+                else
+                {
+                    put_pixel(0); // Desliga os LEDs com zero no buffer
+                }
             }
         }
     }
