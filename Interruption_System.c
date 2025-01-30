@@ -38,12 +38,10 @@ int main()
 
     ws2812_program_init(pio, sm, offset, WS2812_PIN, 800000, IS_RGBW);
 
+    set_number8(led_r, led_g, led_b);
+
     while (true) 
     {
         blink_led();
-        set_number7(led_r, led_g, led_b);
-        sleep_ms(tempo);
-        set_number7(0, 0, 0);
-        sleep_ms(tempo);
     }
 }

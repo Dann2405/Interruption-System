@@ -91,6 +91,15 @@ bool number7[columns][rows] =
         1, 0, 0, 0, 0
     };
 
+bool number8[columns][rows] =
+    {
+        0, 1, 1, 0, 0,
+        1, 0, 0, 1, 0,
+        0, 1, 1, 0, 0,
+        1, 0, 0, 1, 0,
+        0, 1, 1, 0, 0
+    };
+
 // envia o valor da cor para o led
 static inline void put_pixel(uint32_t pixel_grb)
 {
@@ -410,6 +419,43 @@ void set_number7(uint8_t r, uint8_t g, uint8_t b)
             for (int j = rows - 1; j >=0; j--)
             {
                 if (number7[i][j])
+                {
+                    put_pixel(color);
+                }
+                else
+                {
+                    put_pixel(0);
+                }
+            }
+        }
+    }
+}
+
+void set_number8(uint8_t r, uint8_t g, uint8_t b)
+{
+    uint32_t color = urgb_u32(r, g, b);
+
+    for(int i = columns - 1; i >=0; i--)
+    {
+        if ((columns - i) % 2 == 0)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if(number8[i][j])
+                {
+                    put_pixel(color);
+                }
+                else
+                {
+                    put_pixel(0);
+                }
+            }
+        }
+        else
+        {
+            for(int j = rows - 1; j >=0; j--)
+            {
+                if(number8[i][j])
                 {
                     put_pixel(color);
                 }
