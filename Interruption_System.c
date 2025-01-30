@@ -31,6 +31,7 @@ identificável.*/
 int main()
 {
     stdio_init_all();
+    init_gpio();
 
     while (true) 
     {
