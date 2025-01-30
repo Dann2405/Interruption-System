@@ -42,7 +42,7 @@ void set_one_led(uint8_t r, uint8_t g, uint8_t b)
     uint32_t color = urgb_u32(r, g, b);
 
     // Define todos os LEDs com a cor especificada
-    for (int i = 0; i < columns; i++)
+    for (int i = columns - 1; i >= 0; i--)
     {
         for (int j = 0; j < rows; j++)
         {
