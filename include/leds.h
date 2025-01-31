@@ -3,13 +3,12 @@
 
 // definições inciais
 
-const uint LED_RED = 13; // led vermelho
+const uint LED_RED = 13;   // led vermelho
 const uint LED_GREEN = 11; // led verde
-const uint LED_BLUE = 12; // led azul
-#define time_led 100 // tempo de 100 ms
+const uint LED_BLUE = 12;  // led azul
+#define time_led 100       // tempo de 100 ms
 
 // 1. O LED vermelho do LED RGB deve piscar continuamente 5 vezes por segundo.
-
 
 // configuração dos pinos GPIOs
 void init_gpio()
@@ -31,7 +30,7 @@ void init_gpio()
 void blink_led()
 {
     gpio_put(LED_RED, 1); // liga o led
-    sleep_ms(time_led); // espera 100 ms
+    sleep_ms(time_led);   // espera 100 ms
     gpio_put(LED_RED, 0); // desliga o led
-    sleep_ms(time_led); // espera 100 ms
+    sleep_ms(time_led);   // espera 100 ms
 }

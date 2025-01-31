@@ -7,45 +7,33 @@
 #include "ws2812.pio.h"
 
 #include "include/leds.h"
-#include "include/button.h"
 #include "include/matrix5x5.h"
-
-/*Descrição do Projeto:
-Neste projeto, você deverá utilizar os seguintes componentes conectados à placa BitDogLab:
-• Matriz 5x5 de LEDs (endereçáveis) WS2812, conectada à GPIO 7.
-• LED RGB, com os pinos conectados às GPIOs (11, 12 e 13).
-• Botão A conectado à GPIO 5.
-• Botão B conectado à GPIO 6.
-
-
-Funcionalidades do Projeto
-1. O LED vermelho do LED RGB deve piscar continuamente 5 vezes por segundo.
-2. O botão A deve incrementar o número exibido na matriz de LEDs cada vez que for pressionado.
-3. O botão B deve decrementar o número exibido na matriz de LEDs cada vez que for pressionado.
-4. Os LEDs WS2812 devem ser usados para criar efeitos visuais representando números de 0 a 9.
-• Formatação fixa: Cada número deve ser exibido na matriz em um formato fixo, como
-caracteres em estilo digital (ex.: segmentos iluminados que formem o número).
-• Alternativamente, é permitido utilizar um estilo criativo, desde que o número seja claramente
-identificável.*/
+#include "include/button.h"
 
 int main()
 {
     stdio_init_all();
 
-    
-    init_gpio(); // inicia os leds
+    init_gpio();       // inicia os leds
     init_buton_gpio(); // inicia os botões
 
-    PIO pio = pio0;
-    int sm = 0;
-    uint offset = pio_add_program(pio, &ws2812_program);
+    PIO pio = pio0;                                      // Configuração do PIO 0
+    int sm = 0;                                          // Define o estado da máquina de estado do PIO (SM)
+    uint offset = pio_add_program(pio, &ws2812_program); // Vai carregar o programa do PIO para controlar os LEDs WS2812
 
-    ws2812_program_init(pio, sm, offset, WS2812_PIN, 800000, IS_RGBW);
+    ws2812_program_init(pio, sm, offset, WS2812_PIN, 800000, IS_RGBW); // Vai inicializar o programa de controle do WS2812 no PIO
 
-    set_number9(led_r, led_g, led_b);
+    // Configuração da interrupção com callback para botão A E B
+    gpio_set_irq_enabled_with_callback(Button_A, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
+    gpio_set_irq_enabled_with_callback(Button_B, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
 
-    while (true) 
+    // Obs: Foi utilizado a interrupção de borda de descida (falling edge)
+
+    // Exibir o primeiro número ao iniciar
+    display_number(current_number);
+
+    while (true)
     {
-        blink_led();
+        blink_led(); // Função que faz o LED vermelho piscar continuamente 5 vezes por segundo (definida em leds.h)
     }
 }

@@ -11,15 +11,9 @@
 #define rows 5
 #define tempo 400
 
-// 4. Os LEDs WS2812 devem ser usados para criar efeitos visuais representando números de 0 a 9.
-// • Formatação fixa: Cada número deve ser exibido na matriz em um formato fixo, como
-// caracteres em estilo digital (ex.: segmentos iluminados que formem o número).
-// • Alternativamente, é permitido utilizar um estilo criativo, desde que o número seja claramente
-// identificável.
-
 uint8_t led_r = 0;   // Intensidade do vermelho
 uint8_t led_g = 0;   // Intensidade do verde
-uint8_t led_b = 100; // Intensidade do azul
+uint8_t led_b = 200; // Intensidade do azul
 
 // BUFFER DE NUMBEROS DE 0 A 9 (O led vai ligar onde tiver 1 e desligar onde tiver 0)
 bool number0[columns][rows] =
