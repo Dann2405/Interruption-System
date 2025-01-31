@@ -31,7 +31,11 @@ identificável.*/
 int main()
 {
     stdio_init_all();
-    init_gpio();
+
+    
+    init_gpio(); // inicia os leds
+    init_buton_gpio(); // inicia os botões
+
     PIO pio = pio0;
     int sm = 0;
     uint offset = pio_add_program(pio, &ws2812_program);
