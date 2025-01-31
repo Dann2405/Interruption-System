@@ -1,3 +1,5 @@
+#include "include/matrix5x5.h"
+
 // definições inciais
 
 const uint Button_A = 5;
@@ -21,6 +23,10 @@ void init_buton_gpio()
 volatile int current_number = 0; //Número atual (de zero a 9)
 volatile bool debounce_active = false; // vai controlar se o botão pode ser prssionado novamente
 struct repeating_timer debounce_timer; // cria um temporizador para debounce (timer programavel)
+
+// Protótipos das funções
+void gpio_irq_handler(uint gpio, uint32_t events);
+bool debounce_timer_callback(struct repeating_timer *t);
 
 
 // Vai exibir número baseado na variável current_number
@@ -65,3 +71,25 @@ void display_number(int num)
     }
 }
 
+// Interrupção do botão com debounce
+
+void gpio_irq_handler(uint gpio, uint32_t events)
+{
+    if(!debounce_active)
+    {
+        debounce_active = true;
+        add_repeating_timer_ms(50, debounce_timer_callback, NULL, &debounce_timer);
+    }
+}
+
+// Callback de debounce
+bool debounce_timer_callback(struct repeating_timer *t)
+{
+    if(gpio_get(Button_A) == 0)
+    {
+        current_number = (current_number + 1) % 10;
+        display_number(current_number);
+    }
+    debounce_active = false;
+    return false;
+}

@@ -1,3 +1,7 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
+
 // definições inciais
 
 #define NUM_PIXELS 25
@@ -522,3 +526,5 @@ void set_number9(uint8_t r, uint8_t g, uint8_t b)
         }
     }
 }
+
+#endif
