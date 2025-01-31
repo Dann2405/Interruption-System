@@ -17,3 +17,51 @@ void init_buton_gpio()
     gpio_pull_up(Button_A);
     gpio_pull_up(Button_B);
 }
+
+volatile int current_number = 0; //Número atual (de zero a 9)
+volatile bool debounce_active = false; // vai controlar se o botão pode ser prssionado novamente
+struct repeating_timer debounce_timer; // cria um temporizador para debounce (timer programavel)
+
+
+// Vai exibir número baseado na variável current_number
+void display_number(int num)
+{
+    switch (num)
+    {
+    case 0:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 1:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 2:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 3:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 4:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 5:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 6:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 7:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 8:
+        set_number0(led_r, led_g, led_b);
+        break;
+    case 9:
+        set_number0(led_r, led_g, led_b);
+        break;
+    
+    default: 
+        set_number0(led_r, led_g, led_b);
+        break;
+    }
+}
+
