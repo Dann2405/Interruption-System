@@ -92,6 +92,7 @@ bool debounce_timer_callback(struct repeating_timer *t)
             if (current_number < 9) // incrementa o número se ele for menor que 9
             {
                 current_number = (current_number + 1) % 10; // Incrementa até o numero 9 (não passa disso)
+                printf("Numero atual: %d\n", current_number);
             }
         }
         else if (last_pressed_button == Button_B) // Se o botão B for pressionado, decrementa o número
@@ -99,6 +100,7 @@ bool debounce_timer_callback(struct repeating_timer *t)
             if (current_number > 0) // Vaidecrementar se ele for maior que 0
             {
                 current_number = (current_number - 1 + 10) % 10; // Decrementa até o numero 0 (não passa disso)
+                printf("Numero atual: %d\n", current_number);
             }
         }
 
