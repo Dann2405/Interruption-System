@@ -4,7 +4,6 @@
 
 // definições inciais
 
-#define NUM_PIXELS 25
 #define WS2812_PIN 7
 #define IS_RGBW false
 #define columns 5
