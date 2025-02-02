@@ -105,4 +105,4 @@ Após realizar a configuração, todos os componentes estarão prontos para a op
 
 ## Vídeo de Demonstração
 
-*(Vídeo de demonstração a ser adicionado posteriormente)*
+Click [AQUI](https://drive.google.com/file/d/10SKbR7IpSxphw9sJruMMVhffi9yCihAv/view?usp=sharing) para acessar o video de demonstração
